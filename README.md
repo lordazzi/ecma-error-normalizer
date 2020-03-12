@@ -33,6 +33,8 @@ xhr.onreadystatechange = () => {
 
 ```
 
+ErrorConverter will be every a singleton and all new instance will return the same instance. You can provide this class into your angular aplication, as a service.
+
 ### The adapter
 But for the error converter know how to normalize, you must say to it using an adapter:
 
