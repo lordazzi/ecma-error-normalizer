@@ -6,7 +6,7 @@ import { IErrorNormalized } from './error-normalized.interface';
  * with out this, the class has no effect.
  * Implement the ICustomErrorAdapter interface.
  */
-export class CommonErrorAdapter implements ICustomErrorAdapter<Error> {
+export class CommonErrorAdapter implements ICustomErrorAdapter<Error & { rejection: Error }> {
 
   /**
    * Include a single name to your adapter
@@ -18,7 +18,7 @@ export class CommonErrorAdapter implements ICustomErrorAdapter<Error> {
    * Return `true` for yes and `false` for no.
    * @param thrown
    */
-  typeCheck(thrown: any): thrown is Error {
+  typeCheck(thrown: any): thrown is Error & { rejection: Error } {
     if (thrown instanceof Error || thrown && thrown.rejection instanceof Error) {
       return true;
     }
