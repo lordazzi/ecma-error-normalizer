@@ -8,10 +8,10 @@ cache:
   directories:
   - node_modules
 before_install:
-- npm install -g typescript && tsc -v
-- npm install -g karma
+- npm install -g typescript@5.18.0 && tsc -v
+- npm install -g tslint@3.7.5
 install:
 - npm install
 script:
 - npm run lint
-- npm run build
+- npm run build:lnx
