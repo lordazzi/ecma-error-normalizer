@@ -1,3 +1,4 @@
+import { AdapterImpl } from './adapter-impl.type';
 import { ICustomErrorAdapter } from './custom-error-adapter.interface';
 import { IErrorNormalized } from './error-normalized.interface';
 
@@ -5,22 +6,39 @@ export class ErrorConverter {
 
   private static instance: ErrorConverter | null = null;
 
-  private errorNormalizer: {
+  private adapters: {
     [name: string]: ICustomErrorAdapter<unknown> | undefined
   } = {};
 
-  constructor() {
+  constructor(adapters: AdapterImpl[]) {
     if (!ErrorConverter.instance) {
       ErrorConverter.instance = this;
     }
 
+    ErrorConverter.instance.adapters = this.generateAdapterMap(adapters);
+
     return ErrorConverter.instance;
+  }
+
+  private generateAdapterMap(adapters: AdapterImpl[]): {
+    [name: string]: ICustomErrorAdapter<unknown> | undefined
+  } {
+    const adaptersMap: {
+      [name: string]: ICustomErrorAdapter<unknown> | undefined
+    } = {};
+
+    adapters.forEach(adapterClazz => {
+      const adapter = new adapterClazz();
+      adaptersMap[adapter.name] = adapter;
+    });
+
+    return adaptersMap;
   }
 
   create(thrownError: unknown): IErrorNormalized | null {
     const foundAdapter = Object
-      .keys(this.errorNormalizer)
-      .map(key => this.errorNormalizer[key] || null)
+      .keys(this.adapters)
+      .map(key => this.adapters[key] || null)
       .find(adapter => this.checkAdapterByClassType(adapter, thrownError));
 
     if (foundAdapter) {

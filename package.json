@@ -13,7 +13,7 @@
   "scripts": {
     "test": "karma start",
     "lint": "tslint --project=tsconfig.json",
-    "build": "tsc --project ."
+    "build": "tsc --project .; copy LICENSE ./dist/LICENSE; copy README.md ./dist/README.md; copy MORE-COMMON-HTTP-PROBLEMS.md ./dist/MORE-COMMON-HTTP-PROBLEMS.md; copy package.json ./dist/package.json; copy package-lock.json ./dist/package-lock.json"
   },
   "keywords": [
     "typescript",

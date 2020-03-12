@@ -16,11 +16,14 @@ In addition to the issue of throwable structures, there are other error structur
 A classe that's know how to convert all errors into a single structure, a normalized structure.
 
 ## The Solution Implementation
-The error converter is a structure that know all possibilities of errors in your software and can normalize all then:
+The error converter is a structure that will centralize all solutions for all possibilities of errors in your software, and it can normalize then:
 
 ```typescript
 // normalization for simple error
-const errorConverter = new ErrorConverter();
+const errorConverter = new ErrorConverter([
+  CommonErrorAdapter,
+  HttpErrorAdapter
+]);
 const normalizedError = errorConverter.create(new Error('Some thrown error'));
 
 // normalization for http error
@@ -33,7 +36,7 @@ xhr.onreadystatechange = () => {
 
 ```
 
-ErrorConverter will be every a singleton and all new instance will return the same instance. You can provide this class into your angular aplication, as a service.
+ErrorConverter will be every a singleton and all new instance will return the same instance. You can provide this class into your angular aplication, as a service, you must use a factory function for that.
 
 ### The adapter
 But for the error converter know how to normalize, you must say to it using an adapter:
@@ -42,11 +45,8 @@ You will need to create adapters representing each of the possibilities of error
 
 ```typescript
 /**
- * This decorator will make `CommonErrorAdapter` be visible to the ErrorConverter,
- * with out this, the class has no effect.
  * Implement the ICustomErrorAdapter interface.
  */
-@ErrorAdapter()
 export class CommonErrorAdapter implements ICustomErrorAdapter<Error> {
 
   /**
@@ -98,7 +98,6 @@ export class CommonErrorAdapter implements ICustomErrorAdapter<Error> {
 For an XMLHttpRequest error, you will need to create the following signature:
 
 ```typescript
-@ErrorAdapter()
 export class HttpErrorAdapter implements ICustomErrorAdapter<XMLHttpRequest> 
 ```
 
