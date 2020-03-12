@@ -11,8 +11,7 @@
   },
   "homepage": "https://github.com/lordazzi/ecma-error-normalizer#readme",
   "scripts": {
-    "test": "karma start",
-    "lint": "tslint --project=tsconfig.json",
+    "lint": "tslint --project tsconfig.json",
     "build:win": "tsc --project . && copy LICENSE dist/LICENSE && copy README.md dist && copy MORE-COMMON-HTTP-PROBLEMS.md dist && copy package.json dist && copy package-lock.json dist",
     "build:lnx": "tsc --project . && cp LICENSE dist/LICENSE && cp README.md dist && cp MORE-COMMON-HTTP-PROBLEMS.md dist && cp package.json dist && cp package-lock.json dist"
   },

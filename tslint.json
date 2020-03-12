@@ -69,7 +69,7 @@
       "ignore-params"
     ],
     "no-namespace": true,
-    "no-misused-new": true,
+    "no-misused-new": false,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
