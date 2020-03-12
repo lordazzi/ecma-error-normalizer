@@ -1,6 +1,0 @@
-./node_modules/*
-./src/*
-.gitignore
-.travis.yml
-tslint.json
-tsconfig.json
