@@ -1,6 +1,6 @@
 {
   "name": "ecma-error-normalizer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool to solve the problem of multiple ecmascript error possibilities. It will normalize in single error structure.",
   "repository": {
     "type": "git",
