@@ -29,6 +29,12 @@ export class ErrorConverter {
 
     adapters.forEach(adapterClazz => {
       const adapter = new adapterClazz();
+      const hasAdapter = adaptersMap[adapter.name];
+      if (hasAdapter) {
+        console.warn(`You're overriding adapter ${hasAdapter.constructor.name} with ${adapterClazz.name}. ` +
+          `They both have the name "${adapter.name}".`);
+      }
+
       adaptersMap[adapter.name] = adapter;
     });
 

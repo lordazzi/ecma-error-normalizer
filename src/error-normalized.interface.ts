@@ -43,7 +43,7 @@ export interface IErrorNormalized {
    * How this information will be displayed and whether it will be displayed does not
    * matter, the important thing is that it is available.
    */
-  techinicalMessages: string[];
+  technicalMessages: string[];
 
   /**
    * Original object responsible for the error

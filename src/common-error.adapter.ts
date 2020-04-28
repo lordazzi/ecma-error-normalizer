@@ -8,10 +8,17 @@ import { IErrorNormalized } from './error-normalized.interface';
  */
 export class CommonErrorAdapter implements ICustomErrorAdapter<Error & { rejection: Error }> {
 
+  private static defaultMessage = 'Some unexpected error happen inside the application';
+
   /**
    * Include a single name to your adapter
    */
   name = 'thrown-error';
+
+  static setDefaultMessage(defaultMessage: string): new () => CommonErrorAdapter {
+    CommonErrorAdapter.defaultMessage = defaultMessage;
+    return CommonErrorAdapter;
+  }
 
   /**
    * This method must check if the value should be normalized byt this class.
@@ -45,8 +52,8 @@ export class CommonErrorAdapter implements ICustomErrorAdapter<Error & { rejecti
     return {
       name: 'don\'t matter, this property will be override with the name of this class',
       type: 'error',
-      messages: ['Some unexpected error happen inside the application'],
-      techinicalMessages: [stack],
+      messages: [CommonErrorAdapter.defaultMessage],
+      technicalMessages: [stack],
       //  this property will be override with the error
       originalInformation: null
     };
