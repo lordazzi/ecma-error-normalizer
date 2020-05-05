@@ -17,7 +17,7 @@ export class NormalizedErrorAdapter implements ICustomErrorAdapter<IErrorNormali
       const hasAttributeOriginalInformation = 'originalInformation' in thrown;
       const attributeTypeIsString = typeof thrown.type === 'string';
       const hasMessages = thrown.messages instanceof Array;
-      const attributeTechinicalMessagesExists = 'techinicalMessages' in thrown;
+      const attributeTechinicalMessagesExists = 'technicalMessages' in thrown;
 
       if (
         attributeNameIsString &&
